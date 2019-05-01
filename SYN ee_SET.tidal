@@ -1,0 +1,35 @@
+DIRT
+
+xfadeIn 8 8
+$slow "2 1 1 4 1"
+$every 4 (|+|n "[<3 5 7 9>][<15 17 19 21>]")
+-- $every 3 (|-|n "<24 22 7 12>")
+$ n (run 8) # s"[[e3, a4]/4 [e3 a4]/4]" #s "[[[supersaw][supersquare]*2],[bass8*8]]" #release "2 4 8"
+#decay "4 8 12"
+#delay 0.4 #delaytime "<0.25 0.5>" #delayfeedback 0.8
+#shape 0.4 #gain 0.6 #orbit 5
+-- #bpf (slow 4 sine*1250)
+|*|shape 0.4
+|*|gain 0.5
+
+
+
+SPI
+
+d9
+$every 3 (|+ n "[3 5 7]")
+$fast "[1 2 4]/4"
+$midinote "[30 40*2 ~][~ 40*2 ~][30 ~ ~]"
+# s "iac9"
+
+#velocity 0
+
+
+d7
+-- $every 4 (|*| n "[3 5 7], [15 17 19]")
+$every 5 (|*| n "[24 8 12] [5 7 9]")
+-- $slow "[1 2 4]/4"
+-- $midinote "[10 120*2 ~][~ 80*2 ~][50 ~ ~]"
+$midinote "24"
+# s "iac7"
+-- #decay "4 8 12"

@@ -1,0 +1,231 @@
+BEATS TOPLAP 15
+
+
+
+
+///////////////
+
+xfadeIn 1 10 silence
+
+
+
+
+
+
+
+
+d1 $ s "bd"
+
+--
+
+xfade 1 16
+    $ loopAt 8
+      $ n "{ 0 0 7 10 }" #
+    -- s "[ex_drum_lp:3*<8 16 4>]"
+    s "bd*2 sn [< cp>]/1 "
+    #hpf 200
+    #lpf 800
+    #gain 0.2
+
+-- d1 $ linger "<1 0.25 10.5 1>" $ n "0 2[3 4] 2"
+-- #s "arpy"
+
+
+xfadeIn 1 8
+$s "[ee_motm:2*2]"
+#speed "<-0.5 -1 -0.6>"
+#lpf 600
+#hpf 200
+#shape 0.4
+#gain 0.9
+
+
+xfadeIn 4 24 silence
+
+d4
+$ off 0.5 (#speed "-4")
+$every 2 (slow 1)
+-- $slow "<0.5 1 2>"
+$slow (("<2 1 2 2>")*"<4 2 4 8>")
+-- $ chop 24
+-- $striate' 24 0.06
+$ chop 128
+-- $striate "<4 8 16 4 1 2 4>"
+$n (irand 16)#
+s "[ee_motm:2*2]"
+#speed (slow 4 $ sine*(8.5*("<-0.25 -0.75 0.5 4 2>")))
+#pan (slow "<4 2 1 8 2>" $ sine)
+#room 0.3
+#cut 1
+#gain 0.6
+-- METAL MOTM
+
+d2
+$slow 1
+-- $fast "<4 2 4 1 4 4>"
+$fast "<2 1 2 2>"
+-- $every 3 (n "1 4 6 [ 8]")
+$ every 4 (fast "<1 1 4 1 0.5>")
+$ every 5 (off 0.125 (#speed "<-4 -8 -1 -9 -5>"). (#end 0.7))
+$ stack[
+-- n "1 4 6 [ 8]" #
+s "[[808bd]*<1 4 8> [808bd*4]/2]*2"
+-- #speed (scale 1 0.8 $slow 0.5 sine1)
+#speed (scale 0.7 1 $slow 0.5 saw1)
+#hpf 40 #lpf 800
+#end 0.02
+#shape 0.3
+#gain 0.7
+-- ,every 2 (slow 6)
+-- $fast 16
+-- , n ("[68 69 70 71]/4") #
+-- s "[[ee_bbgg_s:16] [eee_b1*<2 4>]]"
+-- #room "<0.2 0.26 0.3>"
+-- #speed (scale (-0.7) (-0.8) $slow 3 sine1 )
+-- -- #cut "<1 1 1 0 1 1 1 1>"
+-- #gain "<0.6 0.4/2>"
+,s "~"]
+|*| shape 0.5 |*|gain 0.7
+---- MEAU BEAT
+
+//////
+
+t3 (xfadeIn 16) silence
+$slow 2
+-- $every "[<3 6 9>]" (#speed "[0.5 0.7 0.8 -2 -1 1]")
+$stack[
+-- sometimesBy 0.2 (fast 4) $slow "<1 2 1 2 1>" $n"[0 1 4*2 8*4]"# -- OJOOO
+s "[[303bd*2 [303bd ~/2] ][303bd*8]/2, [303bd ~]/2]"#shape 0.8
+#gain 0.7
+,n"[0 1 4 8 12 4 1 0 ]"#
+s "[[303bd*2 [303bd ~/2] ][303va*8]/2, [303va ~]/8]" #speed "0.5 0.4*2 0.2"#gain 0.4 #pan sine1
+,n "[[0 1 4 8 12 4 1 0],[3 4 7 11 15 7 4 3]/2]*<2 4 0.5>" #
+s "{ [ [303bd*2] [303cy ~/2] [303perc*4][303cp ~]/2]/8}%8" --HERE IT COMES
+#pan (slow 0.5 sine1*"<0.2 0.3 0.6>")
+#gain 0.6
+,every "<1 1 2 1 1 4 8>" (#speed "1 1 -0.7 1") $n"[0 1 4 8 12 4 1 0]"#
+s "{[[ex_hand_perc*2 [ex_hand_perc ~/2] ][ex_hand_perc*4]/1, [ex_hand_perc ~]/4]*<2 4 2 8>}"
+#speed "[[0.5 0.3 0.4 [0.6, -0.6]],[3 -1 1 [2, -4]]]"
+#gain 0.7
+,s"~"]
+|*|shape 0.5 |*|gain 1
+-- BROKEN BEAT
+
+
+
+t3 (xfadeIn 16 ) silence
+
+ -- solo $ d3
+t3 (xfadeIn 8 )
+-- $slow "[[0.5 0.25 0.5 0.125]*<0.125 0.125 0.5>]/2"
+-- $ slow "1 2 1 0.125 1 2 1 4"
+$slow "<2 7>"
+$ stack[
+     -- n"<0 1 0 2 0 1 0 3>"#
+     -- s "ifdrums*<4 8 2 1 1 >"
+     -- ,off 0.125 (#speed "<0.12 -0.14>") $n"<{[0 1 0 2 0 1 0 3][2 4 2 6 2 0 2 6]}>"#
+     s "ee_fx*<4 0.5 2 1 1 >"
+     #speed "-20"
+     # cut 1
+     #gain 0.3
+     ,n"<{[0 1 0 2 0 1 0 3][2 4 2 6 2 0 2 6]}>"#
+     -- s "ee_chime*<4 8 2 1 1 >"
+     -- # cut "<1 1 1 0 1 1 0 1 >"
+     -- # cut "1"
+     -- #speed "<2 -3 -1 -0.3>"
+     -- #gain 0.05
+     ,n"<{[0 1 0 2 0 1 0 3][2 4 2 6 2 0 2 6]}>"#
+     s "ee_fol*<4 8 2 1 1 >"
+     #speed "-8 4 -2 "
+     # cut 1
+     #gain 0.4
+      ,s"~"]
+      #shape 0.6 #gain 0.6
+      ---- BEEPS BEAT
+
+
+
+thanks everyone !
+
+
+
+
+so long
+e_e !
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+t4 (xfadeIn 16) silence
+
+    solo $    t4 (xfadeIn 0.2)
+        -- $slow "<8 8 4>"
+        -- $slow "[1, 2, 8]"
+        -- $chop "[8 4 2 8]"
+        $slow 16
+        $ stack[
+        n "[0 2 0 8 0 4]"
+        #s "{[bd*4]/1, [<[bd*8] bd*4>]/<1 1 2 4>}"
+        #speed "[1 0.4 -0.3 2 4 -6 -18 -4]*4"
+        #cut 1
+        #shape 0.6 #gain 0.8
+        ,s"[{[[bd bd*4 bd]]}%1/4]"
+        -- ,n ("[1 4 3 58 9*3 4 [16,15/2] 59/2]"+ "12 27 28")#
+        ,n ("[1 4 3 58 9*3 4 [16,15/2] 59/2]"+ "45 32 24")#
+        s"[[emoji_sfx*8]]"
+        -- #speed "[<0.25 0.5 -2 -4 -20>],[<-3 -4 [-5 -6]>]"
+        -- #speed "[<0.22 0.3 -2.5 -8 -40>],[<-3 -9 [-15 -16]>]"
+        #shape 0.7
+        #gain 0.9
+        ,s"[{[[bd bd*4 bd]]}%8/<4 2 8 1 2>]"#lpf 80 #shape 0.7 #gain 0.9
+        -- ,s"[{[[bass3:2 bass3:4*8 bass3:4]]}%16/<4 2 4 1 2>]"#lpf 3240 #shape 0.7
+        -- #cut 1
+        #gain 0.5
+        ,s"[{[[cp cp*4 bd]]}%2/2]/<0.5? 1 2 4 2>" #gain 1
+        -- ,s"[{[[ex_bd_101 ex_bd_101*4 ex_bd_101]]}%16]/<1 8 2 4 1 1>" #gain 0.8
+        -- ,s"[{[[arpy:2 bass3*4 arpy]]}%4]/<1 2 16 1>" #gain 0.7
+        -- ,n"<{[0 1 0 2 0 1 0 3][2 4 2 6 2 0 2 6]}>"#
+        -- s"[{[[ee_bbgg_s:16*<2 4> ee_bbgg_s:8*4/2 ee_bbgg_s:4/2]]}%16]/<2 4 1 1>"
+        -- #legato "1 1 1 1 0 1 [<1 0 1 1>] 1"
+        -- #cut 1
+        #gain 1.1
+        ,s "~"] |*|shape 0.5 |*| gain 0.9
+        ---- EMOBEAT
+
+
+      t5 (xfadeIn 1) silence
+
+      t5 (xfadeIn 2)
+      -- $slow "[1, 2, 8]"
+      -- $chop "[8 4 2 8]"
+      $slow "<2 4 8>"
+      -- $ slow 2
+       $ off 0.125 (#speed "<0.12 -0.24>")
+       -- $ off 0.125 (chop "<8 4>")
+       $ stack[
+      n "[0 4/4 24 0 48]"#
+      s "{[eee_b1*4]/2, [eee_b1*8]/<2 4 8>}%2"
+      #speed "1 0.4 -0.3 2 4 -6 -18 -4"
+      -- #speed 0.5
+      #cut 1
+      #shape 0.6 #gain 0.8
+      ,s "~"] |*|shape 0.5 |*| gain 0.8
+      ---- BREAK SLOW

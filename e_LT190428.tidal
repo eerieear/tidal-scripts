@@ -1,0 +1,107 @@
+
+resetCycles
+
+d2 $ s "cp"
+
+d1 silence
+
+xfadeIn 1 8
+$every "<[1 2 1 1][1 1 4 1]>" (dub)
+-- $slow 4
+-- $fast 1
+-- $every 8 (|+n "3 0 1 0 5 -12 0")
+$every "<3 15>" (|+n "[-8,-12]")
+-- $every 3 (|*| speed "-0.5,0.7")
+$
+-- fshift "40 20 -10 -2 -10 2000"  #
+-- octersub "24 16" #
+-- octer "-3 0.4" #
+-- ring "<[2 4 8 2~]*2>" #
+-- ringdf "<2 4 8 0.2 >" #
+stack[  s"~"
+        -- ,n "{0 1 0 3 0 5 7 0}%16"
+        -- ,n "{[0 1 0 3 0 5 7 0]/16}%8"
+       ,n "{0 1 0 3 0 5 7 0}%2"
+       ,n "{0 1 0 3 0 5 7 0}%4"
+       ,n "{0 1 0 3 0 5 7 0}%0.5"
+       ,n "[{0 1 0 3 0 5 7 0}%0.25]/8"
+       ]
+#stack[s"~"
+-- ,s "ee_bells*2" +|speed "-2" #end "<0.4 0.6>" #pan (slow 3 $sine*0.7) #gain 0.7 -- #cut 1
+-- ,s "ee_metal/3" +|speed "-4" #end 0.3 #gain 0.8 -- #cut 1
+-- ,s "ee_vx_f/3" +|speed "-4" #end 0.7 #gain 0.6  #cut 1
+-- ,s "ee_chime/16" +|speed "-4" #end 0.4 #pan (slow 3 $((sine*0.5)+0.3)) #gain 0.6 #cut 1
+-- ,s "supertron*8" |+distort "[<1.4 1.1 1.3>]" #gain 0.3
+-- ,s "superhammond" |*|gain 0.8
+-- |+distort "[<1.4 1.1 1.3>]"
+-- ,s "superhammond/1" |*|gain 0.6
+-- |+|distort "[<1.4 1.1 1.3>]"
+-- ,s "superhoover/8" |*|shape 0.4  |*|gain 0.5 -- MUCHO RUIDO
+-- #bpf (slow 0.5 $sine*4000)
+-- |+distort "[<0.8 1.1 0.7>]"
+-- ,s "superreese/4"  |+|pan (slow 1 square) |*|gain 0.7
+-- |+distort "[<0.8 1.1 0.7>]"
+-- ,s "superwavemechanics/<2 4 8>"  |*|gain 0.5 |+|pan (slow 0.5 square)
+-- |+distort "[<1.8 2.1 1.7>]"
+-- ,s "[cp*<2 8>]/4" #lpf 1000 #shape 0.3  #gain 0.9
+,s "[ex_drum_lp2]/8" #lpf 3000 #shape 0.3  #gain 0.9 #cut 1
+,s "[ex_drum_lp2]/8" #lpf 3000 #shape 0.3  #gain 0.9 #cut 1
+,s"~"]
+-- # ring "<2 4 8~>"
+-- #freeze 1
+  -- # octer "-3 0.4"
+  -- #octersub "24 16 0 0 24 16 0 0 "
+-- #speed "[<1 -1>]"
+#speed "[<1 -1>],[<1.2 -1.2>]"
+|*|shape 0.4
+|*|gain 0.35
+#orbit 2
+
+
+d2
+-- $slow 4
+$slow "[<4 8 4 4>][<4 4 [2 2] 4>][<4 [1 1 1 1] [2 2] 4>]"
+-- $every 8 ((off 0.25 ((|*n "[1 2 4]").(#cut 0)).(off 0.35 ((|*n "[23 21 24]/4").(#speed "-0.84" )))))
+-- $shuffle 16
+-- $chop 16
+-- $striate 8
+$ stack[s"~"
+  ,s"ee_bbgg1"
+  -- ,s"[ee_bbgg1:2]/8"
+  ,s"[ee_bbgg1:5]/4"
+  ,s"[ee_bbgg1:8]/2"
+  -- ,s"[ee_bbgg1:6]/8"
+  ,s"[ee_bbgg1:6]/16"+|distort "[<1.4 1.1 1.3>]" #gain 0.4
+      ,s"~"]
+-- #cut 1
+#shape 0.4
+
+
+d5 $ s "cp" # orbit 3
+
+
+\\\\\\\\
+
+unmute 1
+
+clutchIn 4 7 $ fast "2" $every 6 (+|n "1 3 -1 [-2 -4 ]") $ sound "[eee_b2:3*8, eee_b2:6(3,8)?]" #shape 0.4 #orbit 6
+
+clutchIn 3 8 $ sound "bd(6,8)?"
+
+clutchIn 2 8
+$fast 1
+$ stack
+[s"~"
+,s "[jazz*8, [odx*8(3,8)]/2]" #shape 0.4
+-- ,s "ex_bd_101*8(3,8)" # shape 0.3
+,s"~"]
+#orbit 1
+#gain 0.8
+
+clutchIn 1 8
+$every 3 (#speed (slow "1 2 3?" $sine*2))
+$ sound "[eee_b2*4, eee_b1(3,8)]" #shape 0.4 #orbit 3
+
+clutchIn 4 8 $ fast "1" $every 6 (+|n "1 3 -1 [-2 -4 ]") $ sound "[eee_b2:3*8, eee_b2:6(3,8)?]" #shape 0.4 #orbit 2
+
+//////////

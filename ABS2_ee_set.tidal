@@ -1,0 +1,92 @@
+d9 silence
+
+xfadeIn  3  4 silence
+
+xfadeIn 3 4
+    -- $ stut' "<1 4 8 4>" "0.25 0.27 0.35"  ((|+ n "2 -3 1 -1 4 ").(#pan (((sine)*0.3)+0.4)).(|*|gain 0.3)
+    -- .(#cut 2))
+    -- $ stut' "<2 3 2 1>" "0.35 0.37 0.45"  ((+| n "1 -3 2 -2 -4 ").(#pan (((sine)*0.9)+0.1)).(|*|gain 0.8).(#cut 0)) --UNCUT
+    -- $ slow 1
+    $slow "4 8 6 1 12"
+    -- $every 3 (striate' "<16 15 14>" 0.4)
+    -- $striate' "<160 165 240>" "0.55" -- STRIATE X OR HERE
+    $ stack[
+      s"~"
+      ,s "ee_motm*4" #gain 0.4
+      ,s"ee_chime/<1 2 1 4>"
+      #end "0.0125 0.013 1"
+      #cut 2
+      #gain 0.4
+      ,"ee_drone" #shape 0.3 #end 0.2
+      #end "0.025 0.018"
+      #cut 2
+      #gain 0.6
+      , n(run (4)) #s "ee_pulpo*1" --LONG FILE !!!
+      #end 0.013
+      #cut 2
+      #gain 0.7
+      ,s"~"]
+    |*|pan (slow 0.5 $sine)
+    -- #speed (slow 4 $range 1 "<1.2 -0.5> [[-0.5,4],-2]" sine)
+    #speed (slow 4 $range 1 "<0.3 -0.5> [[-0.5,-1],-2]" sine)
+    |*|shape 0.3
+    |*|room 0.3
+    |*|gain 0.4
+
+d3 silence
+
+d1 $ "bd"
+
+xfadeIn 1 16 silence
+
+    xfadeIn 3 4
+          -- $ slow 1
+          $fast "2 1 2 1 1"
+          -- $ slow 24
+        -- $ stut' "<2 3 2 1>" "0.35 0.37 0.45"  ((+| n "1 -3 2 -2 -4 ").(#pan (((sine)*0.9)+0.1)).(|*|gain 0.8).(#cut 0)) --UNCUT
+        -- $ slow 8 --4 or above
+        -- $slow "4 8 6 1 12"
+        -- $every 4 ((#speed "-0.3"). (#cut 0))
+          $ stack[
+          s"~"
+          ,s "ee_gtr_fast" #gain 0.4 -- ONLY ONE INDEX
+          #end "0.13 0.2 0.1"
+          |+ "pan 0.2 0.4 0.8 0.6"
+          #cut 3
+          #gain 0.3
+          ,n (run (8)+18)
+          #s "ee_gtr_s*<2 4 16>"
+          #end "0.3 0.2 0.1"
+          |+ "pan 0.2 -0.4 0.8 0.6"
+          #gain 0.6
+          ,n (run (16)+"< 16 8 1>")
+          #s "tango_s1*<2 4 8 16>"
+          #end "0.3 0.5 0.7"
+          |+ "pan 0.2 -0.4 0.8 0.6"
+          #speed "-0.5"
+          #shape 0.3
+          #gain 0.4
+        ,s"~"]
+        -- |*|pan (slow "<0.25 0.5 >" $sine)
+        -- #speed "<2 1 0.5 -0.5 0.4 -1>" |*| gain 0.5
+        -- #speed (slow 4 $range 1 "<1.2 -0.5> [[-4]-2]" sine) |*| gain 0.5
+        -- #speed (slow 4 $range "-1" "<0.3 -0.5> [[-0.5,-1],-2]" sine) |*| gain 0.5
+        |*|shape 0.4
+        |*|room 0.3
+        |*|gain 0.7
+
+solo 1
+
+xfadeIn 1 16 silence
+
+d1 $ s "bd"
+
+xfadeIn 9 4
+  $slow 2
+  $stack [
+    s"~"
+    ,n (run (8)) #s"ee_noise_s" #shape 0.6
+    ,s"~"]
+    #lpf
+    |* pan "0.2 0.8 0.4 0.6"
+    |*|shape 0.5 |*|gain 0.6

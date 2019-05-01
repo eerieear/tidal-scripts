@@ -1,0 +1,102 @@
+resetCycles
+
+\\\
+MIDI
+
+\\\\\\
+
+d1 $slow "2 1 0 1" $n "{0 1 0 3}%4" #s "iac9" #midichan 1
+
+d1 $slow "2 1 0 [<1 0.25>] 0.5" $n "{[0 1 0 3][[0,1][1,3] 0 [1,2]]}%2" #s "iac9" #midichan "[[1,3]]"
+
+d1 $n "{0 1 0 3}%4" #s "iac9" #midichan "[<[0,1] [[1 1],[~ ~ ~ 2]] [3,1] [1,3]>]"
+
+d1 $ n"{0 3 5 0}%1" #s "iac9" #midichan "[<[0,1] 1>, [3,0] [~ ~ ~ 2]]" #gain 1.2
+
+d2 $ (0.01 <~ ) $ n "{[0 3 5 [1 0] 12 [0,3] 5 0]}%1" #s "iac9" #midichan "[<[0,1] 1>, [3,0] [~ ~ ~ 2]]"
+
+d3 $ (0.03 <~ ) $slow 8 $ n (("{[-12 3 5 [1 -12] 12 [-12,3] 5 -12]}%4")) #s "iac9" #midichan "<0 [1,0,2] [1,0] 0 >" #gain 0.5
+
+d4 $ (0.01 ~> ) $slow 1 $ n "{0 3 0 1}%8" #s"iac9" #sustain 0.0125 #midichan 2
+
+
+xfadeIn 2 24 silence
+
+///////
+
+\\\\\\
+
+xfadeIn 2 8 --silence
+-- $every 4 ((slow 4).(*|n "{[1 1 2 1][1 2 [1,4,2] 2][1 1 2 1][1 [1,2,12] 2 1]}%16" ))
+-- $every 3 (*|n "{[1 1 2 1][1 2 [1,4,2] 2][1 1 2 1][1 [1,2,12] 2 1]}" )
+$stack[  s"~"
+   -- ,n "{0 1 0 3 0 5 7 0}%8"
+   ,n "[{0 1 0 3 0 5 7 0}%4]%16"
+   ]
+#stack[s"~"
+,s "iac9"
+,s"~"]
+#midichan 2
+
+
+
+xfadeIn 3 8 --silence
+$every 4 ((slow 4).(*|n "{[1 1 2 1][1 2 [1,4,2] 2][1 1 2 1][1 [1,2,12] 2 1]}%16" ))
+-- $every 3 (*|n "{[1 1 2 1][1 2 [1,4,2] 2][1 1 2 1][1 [1,2,12] 2 1]}" )
+$stack[  s"~"
+   ,n "{0 1 0 3 0 5 7 0}%8"
+   ,n "[{0 1 0 3 0 5 7 0}%4]/4"
+   ]
+#stack[s"~"
+,s "iac8"
+,s"~"]
+#midichan 3
+
+\\\\\\\\
+MIDI JARM
+
+
+xfadeIn 1 8 --silence
+$every 3 (*|n "{[1 1 2 1[1 2 2 1]]}%2" )
+$stack[  s"~"
+        -- ,n "{0 1 0 3 0 5 7 0}%16"
+        -- ,n "{[0 1 0 3 0 5 7 0]/16}%8"
+       ,n "{0 1 0 3 0 5 7 0}%2"
+       -- ,n "{0 1 0 3 0 5 7 0}%4"
+       -- ,n "{0 1 0 3 0 5 7 0}%0.5"
+       -- ,n "[{0 1 0 3 0 5 7 0}%0.25]/16"
+       ]
+#stack[s"~"
+,s "iac9"
+-- +|speed "-2"
+-- #end "<0.4 0.6>" #pan (slow 3 $sine*0.7) #gain 0.4 -- #cut 1
+-- ,s "iac9"
+-- +|speed "-4"
+-- #end "<0.4 0.6>" #pan (slow 3 $sine*0.7) #gain 0.4 -- #cut 1
+-- ,slow 24 $s "ee_bells*2" +|speed "-2" #end "<0.4 0.6>" #pan (slow 3 $sine*0.7) #gain 0.4 -- #cut 1
+-- ,s "ee_bells*2" +|speed "-2" #end "<0.4 0.6>" #pan (slow 3 $sine*0.7) #gain 0.7 -- #cut 1
+-- , s "ee_metal" +|n 1 +|speed "-4 8" #end 0.3 #pan (slow 2 $range 0.4 0.6 sine) #gain 0.3  -- #cut 1
+-- ,s "ee_vx_f/3" +|speed "-4" #end 0.7 #gain 0.8 -- #cut 1
+-- ,s "ee_chime/16" +|speed "-4" #end 0.4 #pan (slow 3 $((sine*0.5)+0.3)) #gain 0.6 #cut 1
+-- ,s "supertron*8" |+distort "[<1.4 1.1 1.3>]" #gain 0.4
+-- ,s "superhammond" |*|gain 0.4
+-- |+distort "[<1.4 1.1 1.3>]"
+,s "superhoover/8" |*|shape 0.4  |*|gain 0.5 -- MUCHO RUIDO
+#bpf (slow 0.5 $sine*4000)
+|+distort "[<0.8 1.1 0.7>]"
+,s "superreese/4"  |+|pan (slow 1 square) #pan (slow 0.5 $sine)|*|gain 0.45
+|+distort "[<0.8 1.1 0.7>]"
+-- ,s "superwavemechanics/<2 4 8>"  |*|gain 0.5 |+|pan (slow 0.5 square)
+-- |+distort "[<1.8 2.1 1.7>]"
+,s "[cp*<2 8>]/4" #lpf 1000 #shape 0.3  #gain 0.7 #pan 0.6
+,s "[ex_drum_lp2]/8" #lpf 300 #end 0.1 #shape 0.3  #gain 0.2 #cut 1
+,s"~"]
+-- #midichan "{<0 [2,1] 3 4>}%8"
+-- # ring "<2 4 8~>"
+-- #freeze 1
+  -- # octer "-3 0.4"
+  -- #octersub "24 16 0 0 24 16 0 0 "
+-- #speed "[<1 -1>]"
+-- #speed "[<1 -1>],[<1.2 -1.2>]"
+|*|shape 0.4
+|*|gain 1.2

@@ -1,0 +1,558 @@
+//SURGE
+
+xfadeIn 9 16 silence
+
+d9 $ fast "<1 1 [4,2] [1,2]> " $ s "[cp] [arpy:3, arpy/2] [bd ex_hand3]"
+
+solo 1
+
+xfadeIn 2 8 silence
+
+
+
+xfadeIn 2 8 --silence
+-- $every 4 ((slow 4).(*|n "{[1 1 2 1][1 2 [1,4,2] 2][1 1 2 1][1 [1,2,12] 2 1]}%16" ))
+-- $every 3 (*|n "{[1 1 2 1][1 2 [1,4,2] 2][1 1 2 1][1 [1,2,12] 2 1]}" )
+$stack[  s"~"
+   -- ,n "{0 1 0 3 0 5 7 0}%8"
+   ,n "[{0 1 0 3 0 5 7 0}%4]%16"
+   ]
+#stack[s"~"
+,s "iac9"
+,s"~"]
+#midichan 1
+
+
+let ringMod = 30
+d2 $ ccv "0 20 50 60" # ccn ringMod # s "midi"
+
+
+d1 $ ccv "20 40 60 80 100" # ccn 30  # s "iac9"
+
+d9 $velocity 0.5
+
+xfadeIn 3 8 --silence
+$every 4 ((slow 4).(*|n "{[1 1 2 1][1 2 [1,4,2] 2][1 1 2 1][1 [1,2,12] 2 1]}%16" ))
+-- $every 3 (*|n "{[1 1 2 1][1 2 [1,4,2] 2][1 1 2 1][1 [1,2,12] 2 1]}" )
+$stack[  s"~"
+   ,n "{0 1 0 3 0 5 7 0}%8"
+   ,n "[{0 1 0 3 0 5 7 0}%4]/4"
+   ]
+#stack[s"~"
+,s "iac8"
+,s"~"]
+#midichan 3
+
+
+
+
+xfadeIn 1 8 --silence
+$every 3 (*|n "{[1 1 2 1[1 2 2 1]]}%2" )
+$stack[  s"~"
+        -- ,n "{0 1 0 3 0 5 7 0}%16"
+        -- ,n "{[0 1 0 3 0 5 7 0]/16}%8"
+       ,n "{0 1 0 3 0 5 7 0}%2"
+       -- ,n "{0 1 0 3 0 5 7 0}%4"
+       -- ,n "{0 1 0 3 0 5 7 0}%0.5"
+       -- ,n "[{0 1 0 3 0 5 7 0}%0.25]/16"
+       ]
+#stack[s"~"
+,s "iac9"
+-- +|speed "-2"
+-- #end "<0.4 0.6>" #pan (slow 3 $sine*0.7) #gain 0.4 -- #cut 1
+-- ,s "iac9"
+-- +|speed "-4"
+-- #end "<0.4 0.6>" #pan (slow 3 $sine*0.7) #gain 0.4 -- #cut 1
+-- ,slow 24 $s "ee_bells*2" +|speed "-2" #end "<0.4 0.6>" #pan (slow 3 $sine*0.7) #gain 0.4 -- #cut 1
+-- ,s "ee_bells*2" +|speed "-2" #end "<0.4 0.6>" #pan (slow 3 $sine*0.7) #gain 0.7 -- #cut 1
+-- , s "ee_metal" +|n 1 +|speed "-4 8" #end 0.3 #pan (slow 2 $range 0.4 0.6 sine) #gain 0.3  -- #cut 1
+-- ,s "ee_vx_f/3" +|speed "-4" #end 0.7 #gain 0.8 -- #cut 1
+-- ,s "ee_chime/16" +|speed "-4" #end 0.4 #pan (slow 3 $((sine*0.5)+0.3)) #gain 0.6 #cut 1
+-- ,s "supertron*8" |+distort "[<1.4 1.1 1.3>]" #gain 0.4
+-- ,s "superhammond" |*|gain 0.8
+-- |+distort "[<1.4 1.1 1.3>]"
+-- ,s "superhoover/8" |*|shape 0.4  |*|gain 0.6 -- MUCHO RUIDO
+-- #bpf (slow 0.5 $sine*4000)
+-- |+distort "[<0.8 1.1 0.7>]"
+-- ,s "superreese/4"  |+|pan (slow 1 square) |*|gain 0.7
+-- |+distort "[<0.8 1.1 0.7>]"
+-- ,s "superwavemechanics/<2 4 8>"  |*|gain 0.5 |+|pan (slow 0.5 square)
+-- |+distort "[<1.8 2.1 1.7>]"
+-- ,s "[cp*<2 8>]/4" #lpf 1000 #shape 0.3  #gain 0.9
+-- ,s "[ex_drum_lp2]/8" #lpf 300 #shape 0.3  #gain 0.2 #cut 1
+,s"~"]
+-- #midichan "{<0 [2,1] 3 4>}%8"
+-- # ring "<2 4 8~>"
+-- #freeze 1
+  -- # octer "-3 0.4"
+  -- #octersub "24 16 0 0 24 16 0 0 "
+-- #speed "[<1 -1>]"
+-- #speed "[<1 -1>],[<1.2 -1.2>]"
+|*|shape 0.4
+|*|gain 1.2
+
+unsolo 4
+
+unmute 4
+
+xfadeIn 4 32 silence
+
+d3 silence
+
+d1 $slow "2 1 0 1" $n "{0 1 0 3}%4" #s "iac9" #midichan 1
+
+d1 $slow "2 1 0 [<1 0.25>] 0.5" $n "{[0 1 0 3][[0,1][1,3] 0 [1,2]]}%2" #s "iac9" #midichan "[[1,3]]"
+
+d1 $n "{0 1 0 3}%4" #s "iac9" #midichan "[<[0,1] [[1 1],[~ ~ ~ 2]] [3,1] [1,3]>]"
+
+d1 $ n"{0 3 5 0}%1" #s "iac9" #midichan "[<[0,1] 1>, [3,0] [~ ~ ~ 2]]" #gain 1.2
+
+d2 $ (0.01 <~ ) $ n "{[0 3 5 [1 0] 12 [0,3] 5 0]}%1" #s "iac9" #midichan "[<[0,1] 1>, [3,0] [~ ~ ~ 2]]"
+
+d3 $ (0.03 <~ ) $slow 8 $ n (("{[-12 3 5 [1 -12] 12 [-12,3] 5 -12]}%4")) #s "iac9" #midichan "<0 [1,0,2] [1,0] 0 >" #gain 0.5
+
+d4 $ (0.01 ~> ) $slow 1 $ n "{0 3 0 1}%8" #s"iac9" #sustain 0.0125 #midichan 2
+
+d4 silence
+-- $sometimes (off 0.25 (+|n 3 ))
+$ n "{[0 3 5 [1 0] 12 [0,3] 5 0]}%1" #s "iac9" #gain 0.4 #midichan 1
+
+d3 $ n "{[0 3 5 [1 0] 12 [0,3] 5 0]}%0.5" #s "iac9" #midichan 3
+
+
+
+d1 $ n "[[e3, a4][[e2,a4][e5,g4]]]" #s "[iac9]" #release "2 4 8" #midichan "[~ ~/4 2]"
+
+d2 $ n "[[e3, a4][[e2,a4][e5,g4]]]" #s "[iac9]" #release "2 4 8" #midichan "[1/8 ,3]"
+
+
+
+d2 $n "{1 1 4 1*2 8 -2 -1 1}%5" #s "iac9" #midichan "1"
+
+unsolo 1
+
+
+
+d3 $ n "[[e3, a4]?[[<e3 a4>]*2[e5,g4]]]" #s "[iac9]" #release "2 4 8" #midichan "3" #velocity 0.2 #pan sine
+
+d4 $ n "[[a6/2, a3/1]?[[<e3 a4>]*2[e5,g4]]]" #s "[iac9]" #release "2 4 8" #midichan "2"
+
+d9 silence
+
+
+
+
+-- d2 $every 2 (chop 8)
+-- $slow 8
+-- -- $slow "<1 3 4 8 >"
+--     -- $loopAt 4
+--     -- $chop 8
+--   -- $n (irand 6)#
+--     $n (run 6)#
+--   stack[
+--   -- s "ee_vx_f"
+--   -- #speed (slow 4 $range 0.12 0.5 sine)
+--   -- #speed "<0.8 -1 1.1 -1.2>"
+--   s "ee_bells"
+--   -- #speed "<1 0.5>"
+--   #speed (slow 2 $range 0.25 2 saw)
+--   #gain 0.6
+--   -- ,s "ee_chicken"
+--   -- -- #speed (slow 4 $range 0.12 0.5 sine)
+--   -- #gain 0.6
+--     ]
+--     -- #speed "<1 1.2 0.5 -0.7>"
+--       #end "0.3 0.2"
+--     |*| speed "<0.5 2>"
+--     |*|pan (slow 4 sine)
+--     #gain 2
+--     -- #cut 1
+COPIADO SET
+
+d1 $ s "[cp] [arpy:3, arpy/2] [bd ex_hand3]"
+
+d1 $ n "[e3, a4]" #s "[supersaw]" #release "2 4"
+
+
+xfadeIn 1 8
+-- $every "<[1 2 1 1][1 1 4 1]>" (dub)
+-- $slow 4
+-- $fast 1
+$every 8 (|+n "3 0 1 0 5 -12 0")
+-- $every "<3 15>" (|+n "[-8,-12]")
+-- $every 3 (|*| speed "-0.5,0.7")
+$
+-- fshift "40 20 -10 -2 -10 2000"  #
+-- octersub "24 16" #
+-- octer "-3 0.4" #
+-- ring "<2 4 8~>" #
+-- ringdf "<2 4 8 0.2 >" #
+stack[  s"~"
+        -- ,n "{0 1 0 3 0 5 7 0}%16"
+        -- ,n "{[0 1 0 3 0 5 7 0]/16}%8"
+       ,n "{0 1 0 3 0 5 7 0}%2"
+       -- ,n "{0 1 0 3 0 5 7 0}%4"
+       ,n "{0 1 0 3 0 5 7 0}%0.5"
+       -- ,n "[{0 1 0 3 0 5 7 0}%0.25]/16"
+       ]
+#stack[s"~"
+,s "ee_bells*2" +|speed "-2" #end "<0.4 0.6>" #pan (slow 3 $sine*0.7) #gain 0.7 -- #cut 1
+-- ,s "ee_bells*2" +|speed "-2" #end "<0.4 0.6>" #pan (slow 3 $sine*0.7) #gain 0.7 -- #cut 1
+-- ,s "ee_metal/3" +|speed "-4" #end 0.3 #gain 0.8 -- #cut 1
+-- ,s "ee_vx_f/3" +|speed "-4" #end 0.7 #gain 0.8 -- #cut 1
+-- ,s "ee_chime/16" +|speed "-4" #end 0.4 #pan (slow 3 $((sine*0.5)+0.3)) #gain 0.6 #cut 1
+-- ,s "supertron*8" |+distort "[<1.4 1.1 1.3>]" #gain 0.4
+-- ,s "superhammond" |*|gain 0.8
+-- |+distort "[<1.4 1.1 1.3>]"
+-- ,s "superhoover/8" |*|shape 0.4  |*|gain 0.6 -- MUCHO RUIDO
+-- #bpf (slow 0.5 $sine*4000)
+-- |+distort "[<0.8 1.1 0.7>]"
+-- ,s "superreese/4"  |+|pan (slow 1 square) |*|gain 0.7
+-- |+distort "[<0.8 1.1 0.7>]"
+-- ,s "superwavemechanics/<2 4 8>"  |*|gain 0.5 |+|pan (slow 0.5 square)
+-- |+distort "[<1.8 2.1 1.7>]"
+-- ,s "[cp*<2 8>]/4" #lpf 1000 #shape 0.3  #gain 0.9
+-- ,s "[ex_drum_lp2]/8" #lpf 3000 #shape 0.3  #gain 0.9 #cut 1
+,s"~"]
+-- # ring "<2 4 8~>"
+-- #freeze 1
+  -- # octer "-3 0.4"
+  -- #octersub "24 16 0 0 24 16 0 0 "
+-- #speed "[<1 -1>]"
+#speed "[<1 -1>],[<1.2 -1.2>]"
+|*|shape 0.4
+|*|gain 1.2
+
+
+d2
+$slow 4
+-- $slow "[<4 8 4 4>][<4 4 [2 2] 4>][<4 [1 1 1 1] [2 2] 4>]"
+-- $every 8 ((off 0.25 ((|*n "[1 2 4]").(#cut 0)).(off 0.35 ((|*n "[23 21 24]/4").(#speed "-0.84" )))))
+-- $shuffle 16
+-- $chop 16
+-- $striate 8
+$ stack[s"~"
+  -- ,s"ee_bbgg1"
+  -- ,s"[ee_bbgg1:2]/16"
+  -- ,s"[ee_bbgg1:5]/4"
+  -- ,s"[ee_bbgg1:8]/2"
+  -- ,s"[ee_bbgg1:6]/8"
+  -- ,s"[ee_bbgg1:6]/16"+|distort "[<1.4 1.1 1.3>]" #gain 0.4
+      ,s"~"]
+#cut 1
+#shape 0.4
+
+/////
+
+d1 silence
+
+d1
+-- $every 2 (fast "2 4 8 ")
+-- $ every 3 (|+| n "3 5 7")
+$slow 1
+$ n "[e4 a5](2,4) "
+#s "iac9"
+-- #release 0.2
+-- # release "<0.2 0.4 0.8>"
+
+d1
+
+--
+-- d1 $slow 8
+--   $every 4 (#speed "<20 24 12>")
+--   $  n (irand 8)#
+--   "ee_noise_s"
+--   #speed (slow 0.5 $range 1 6 sine)
+--   #pan sine
+--   #gain 1.2
+-- COPIADO
+
+
+d1 $ fast 2 $ s "bd" #gain 1.8 # orbit 1
+
+d7 silence
+
+--
+-- d9
+-- $every 3 (|+ n "[3 5 7]")
+-- $fast "[1 2 4]/4"
+-- $midinote "[30 40*2 ~][~ 40*2 ~][30 ~ ~]"
+-- # s "iac9"
+-- COPIADO
+
+d9
+-- $every 2 (|+ midinote "24 4 12 2")
+-- $every 3 (|+ midinote "2 -4 -7 12")
+-- |+ n "2 4 7 12"
+$slow "<1 2 0.5 1 0.25 1 0.5>"
+-- $fast "[1 2 4]/2"
+-- $midinote "[[18 40 ~][33 43 ~]]"
+$midinote "[[118 47 ~][83 85 ~]]"
+# s "iac9"
+#pan 0.2
+#midichan "0"
+
+d9 silence
+
+bpm = 120
+
+d8
+$every 2 (|+ midinote "24 4 12 2")
+-- $every 3 (|+ midinote "2 -4 -7 12")
+-- |+ n "2 4 7 12"
+-- $slow "<1 2 0.5 1 0.25 1 0.5>"
+-- $fast "[1 2 4]/1"
+$midinote "[[18 40 ~][33 43 ~]]"
+-- $midinote "[[118 47 ~][83 85 ~]]"
+# s "iac9"
+-- #pan 1
+#midichan "<1>"
+
+d8 silence
+
+d9 $gain "1*8" #
+  stack[
+  ccv (slow 1 $range 0 127 rand )
+  ]# s"iac9"
+#midichan "0"
+
+
+  d1 $gain "1*8" #
+    stack[
+    ccv (slow 1 $range 0 127 rand )
+    ]# s"iac9"
+
+cps "1"
+
+d5 silence
+
+xfadeIn 1 4 $fast "0.25"
+$midinote "[[30 40 ~][33 43 ~]]"
+  -- |+| n "[96 98]/2 [104, 124]*2 ]"
+|+| n "[96 98]/2 [104, 124]*2 ]"
+  # s "iac9"
+
+
+  xfadeIn 1 8
+  -- $fast "1 [1/2] [1/8] 4"
+  $midinote "[10 12  18 20 ]"
+    |+| n "[96 98]/2 [104, 124]*1 ]"
+  |+| n "[120 ]"
+    #lpf "200"
+    # s "iac7"
+    #gain 1.1
+
+
+
+d7 $slow "4"
+$midinote "[[30 90 ~][33 43 ~]]"
+  |+| n "[36 48]/2 [14, 24]*2 ]"
+  # s "iac9"
+
+
+
+
+d9 $fast "1 2 4"
+$midinote "[30 40 ~]"
+# s "iac7"
+-- MASTER MUTE
+
+
+
+d8 $slow "2 1 4 "
+-- $off (|+| n "[2 4]")
+    $every "2 " (|+|n (run ((24)-3) )
+      $stack[
+              midinote "[[35*3] 72/2]*4"
+              -- midinote "[90 60 90 90]/<2 4 8>"
+              -- midinote "60 48 8 12"]
+              # s "iac8" ]
+        #lpf 30
+        |*| n  "[2 4 6]"
+        -- #pan "[0.3 0.5 0.7]"
+        #gain 0.8
+        -- #attack
+
+
+-- MASTER D8
+
+d8 silence
+
+d7
+  $ slow "<0.5 0.25>"
+  $stack [
+  n "[[g3/6][g5/3]]/8"
+  ,n "c4/2"
+  ]
+  #s "iac7"
+
+d4 $slow 16
+  $loopAt 1
+  $stack[
+  n ((run 16)+"4 8 12")#
+  s"ee_bbgg_s:7"
+  #speed "-0.6"
+  #lpf 1000
+  #shape 0.4 #gain 0.7
+  ,n ((run 16)+60)#
+  s"ee_bbgg_s*8"
+  #speed "0.3"
+  #lpf 1000
+  #shape 0.4 #gain 0.7
+  ,s"oh/2"#speed 0.2 #gain 0.5 #lpf 30 #hpf 6000
+  ] #shape 0.4 #gain 0.7
+
+d4 silence
+
+d2
+  $slow 6
+  $n (irand 2)#
+  stack[
+  s "ee_vx_f"
+  #speed "<0.8 0.5>"
+  #end "0.2 0.4"
+  #gain 0.4
+  ]
+
+d3 $ slow 3
+    $ n (irand 4)#
+    s "ee_txt_en"
+    -- #speed "-2 0.4/2"
+    #speed (slow 6 $ range (- 1) (-0.7) sine)
+    #shape 0.4
+    #pan (slow 4 $ range 0.2 0.6 sine)
+    #gain 0.4
+
+d5 $ slow 8
+  -- $slow "1 2 3 1 1"
+      -- $off (juxBy (#speed 2))
+      -- $ n ((run 8)+"2 4 6")#
+      $s "jazz*8"
+      #speed "0.5 0.6 0.65 0.7 [-4, -2]/3"
+      #lpf 400
+      #shape 0.5
+      #gain 0.8
+
+
+d1
+  -- $ fast 4
+  $ n "[[e3 a5 e3 e5 ][a2 a3 a2 e3]/3]/16"
+  #s "iac7"
+
+d2 silence
+
+  d1
+    $ slow "<1 2 1 1>"
+    $stack [
+    n "a6/4"
+    ,n "e5/2"
+    ]
+    #s "iac1"
+
+d3
+  $ slow 4
+  $every "<2 4>" (|+|note "{-5 [4, 7, 10]*2 [12, -8] [24]}%4")
+  $ n "[[e2 a3 e2 e4],[e3 a5 e3 e5]/2 ]"
+  #s "iac1"
+  -- #sustain "0.5 2 4 6 1"
+
+d4
+  $fast 8
+  -- $every "<2 4>" (|+|note "<1 3 5 [4, 7, 10]*4 [12, 8]>")
+  -- $ n "[[e2 a3 e2 e4]*4,[e3 a5 e3 e5]]/4"
+  $ n "[[0,4,7] [0*4 4*2 7] [0*2 4*2 [7*2]]/2 -10 -12 -16]/8"
+  #s "iac1"
+  -- #sustain "<1 2 4 2>"
+  -- #midichan 0
+  -- #gain 0.5
+
+
+
+  d1
+    $fast 2
+    -- $every "<2 4>" (|+|note "<-1 -3 -5 [4, 7, 10]*2 [12, -8]>")
+    -- $ n "[[e2 a3 e2 e4]*4,[e3 a5 e3 e5]]/4"
+    $ n "[[0,4,7] [0*4 4*2 7] [0*2 4*2 [7*2]]/2 -10 -12 -16]/4"
+    #s "iac1"
+    #sustain "<0.5 2 4 2>"
+    -- #midichan 0
+    -- #gain 0.5
+
+
+  d2
+    -- $every "<2 4>" (|+|note "<-1 -3 -5 [4, 7, 10]*2 [12, -8]>")
+    $ n "[0]/2"
+    #s "iac2"
+    -- #sustain "<0.2 2 4 0.1>"
+    #midichan 0
+    #gain 0.4
+
+
+
+
+d9 $ n "[-10]" # s"iac1"
+
+d1 $ n "e2 a3 e2 e4" #s "iac1"
+
+
+d1 $ n "[60 40 70 100]" # s "iac9"
+
+d1 $ n (slow 1 (sine+1.2)*100) # s "iac9"
+
+d9 $ n ( sine*100) #"iac2" # velocity "sine*100"
+
+-- d8 $ n "20 40 80" # "iac2"
+
+d8 $ s "iac9" # velocity (slow 4 sine*100)
+
+
+d1 $ n "0 2 4 7" # s "iac1"
+
+
+d1 $ n "0 2 4 7" # s "midi"
+
+d2 $ note "[0 2 4 7]" # s "iac2" # midichan 0
+
+d1 $ note "0 2 4 7" # s "midi" # midichan "0 4"
+
+d2 $ ccv 64 # ccn 30 # s "midi"
+
+
+d2 $ note "[2 5 3 7 12 24]" # s "iac2" # midichan 0
+
+d1
+  -- $every 3 (#gain 0)
+  $ every 2 (slow 4)
+  -- $ slow (("<1 2>")/1)
+  -- $ every 2 (fast "<2 4 1 6 >")
+  -- $every "<2 3 4>" (|+|note "<-1 -3 -5 [4, 7, 10]*2 [12, -8]>")
+  $ stack[s"~"
+    ,note "[[0 2 4 7][0*4 2 4*2 7]/2]"
+    ,note "[~ ~ ~ [[-12 -14 -16 -19][-24*4 -22 -26*8 -31]*2]]"
+    ,s"~"]
+    #sustain 3
+    #release 4
+    # stack [s"~"
+    ,s "<iac1>"
+    # midichan "<[0]>"
+    -- ,s "[~ ~ ~ bd*<3 1 8>]" #speed "<-1 -0.8>" #gain 0.5
+    ,s"~"]
+    -- #gain "0.2 0.5 0.8 1"
+    #gain 0.8
+
+d1  $n "1" #s "iac1" #midichan "[0]"
+
+
+//////////
+
+\\\\\\\\\
+CCV TEST
+
+--
+-- d2  $ccn"<41>" #ccv (range 2 100 $ slow 0.25 sine) #s "iac1" #midichan "[0]"
+--
+-- d2  $ccn"<30 10 90>" #ccv (range 2 100 $ slow 0.25 sine) #s "iac1" #midichan "[0,1]"
+--
+-- d2  $ccn"<41>" #ccv (range 2 100 $ slow 0.25 sine) #s "iac1" #midichan "[0,1]"
+--
+-- d2 $ccv 64 #ccn 30 #s"iac1"

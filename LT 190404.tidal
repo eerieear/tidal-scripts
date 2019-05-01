@@ -1,0 +1,20 @@
+d1 "bd"
+
+
+
+clutchIn 2 4 $ s "[bd]*<3 1 6>"
+
+xfade 4 silence
+
+p "crazy" silence
+
+clutchIn 2 8 $ s "cp*8"
+
+xfade 16 silence
+
+
+d1 $ stack [
+    s"[{[bd]  [sd sd/2]}%8]/<2 1 2 2>"
+    ,s"[{[bd:4*2]  [cp hh/2]}%8]/<1 2 1 1>" #speed "[[0.5] [4 2]]"
+    ,slow 4 $n ((run 16)+"<40 38>") #s "[{ee_bbgg_s}%16]/4" #shape 0.4 #gain 1.1
+    ]

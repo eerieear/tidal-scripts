@@ -1,0 +1,89 @@
+190330 DHHS RDAM SCL DHHS
+////////////////
+
+
+d1 $ s "arpy*4 sd bd*3"
+
+let slow0 = "1 2 [2,3] 4"
+
+d1
+-- $palindrome
+$slow slow0
+$n(run 16) #stack[
+s"~"
+-- ,every 3 (|*|gain 0.3) $s "cc"#speed "<0.8 0.9 -1 -0.6 [2, 3]>" #lpf "<2000 1200>"
+-- #gain 0.9
+-- ,s"[cb cb*2[<cb cb*4>]] ~ ~ ~ ~ ~ ~ "
+,every 4 (|*|gain 0.1)
+$s"99_perc" #speed "<0.8 0.9 -1 -0.6 [2,4,6]>" #lpf "<2000 1200>"
+#delay 0.8 #delaytime "< 0.25 0.5>" #delayfeedback 0.7
+#room 0.6
+#orbit 4
+#shape 0.5 #gain 0.7
+,s"click" #shape 0.6 #gain 1.1 #pan (slow 2 sine)
+-- ,s"808bd" #shape 0.5
+-- ,fast "2 4 1" $s"303tom" #speed "<0.5 0.8 1 -2 >" #shape 0.4 #gain 0.9
+,every 3 (|*|gain 0.1)
+$fast "2 4 1" $s"303va 808ht" #shape 0.4 #gain 0.9 #speed "<0.8 -2>"
+]|*|shape 0.5 |*|gain 0.7
+
+
+d1 $ s "bd*40"
+
+solo 1
+-- unsolo 1
+
+d1 $ s "supersquare"
+
+d2
+-- $palindrome
+-- $slow "[<4 2 [2,3] 4>]"
+$slow "16 24"
+$every "4 8" (#n(run 24))
+$n(run 16)
+#stack[
+s"~"
+,
+degradeBy 0.25$
+s"supersquare"
+|*| n "-8 4 -6 -2 -16 [3,4]"
+,
+slow "4" $
+-- degradeBy 0.125 $
+s"superpiano"
+|*| n "-8 4 -6 -2 -16 [3,4]"
+#speed (slow 2 sine*(0.5))
+#legato "<2 4 6 >" #shape 0.3
+]
+|*|shape 1.2
+#delay 0.8 #delaytime "<0.25 0.35 0.52 >" #delayfeedback 0.7
+#room 0.6
+#pan (slow 1 (rand*0.6))
+#orbit 3
+#gain 0.8
+
+
+do
+
+let pat = "[4 3 5 6]"
+    pan = (slow 2 ((sine*0.6)+0.2))
+
+d2 $fast "2 4"
+  $ s "bass3*<1 1 4 2>"
+  #up (pat*"<1 2 3 4>")
+  -- #speed ((sine*pat)-4)
+  -- #pan = pan
+
+
+  do
+
+    let pat2 = "[14 13 15 16]"
+        pan2 = (slow 2 ((sine*0.6)+0.2))
+
+xfadeIn 2 16
+        $ "ee_chime"
+        #up (pat2*"<1 2 3 4>")
+        #delay 0.8 #delaytime "<0.25 0.35 0.52 >" #delayfeedback 0.7
+        #pan pan2
+        #orbit 3
+        #gain 0.01

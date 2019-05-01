@@ -1,0 +1,39 @@
+
+xfadeIn 4 1
+
+
+
+d1
+   $fast "<2 3 4>"
+  -- $every 4 (#speed "<20 24 12>")
+  $every 3 (|+|speed 0.7)
+  $
+  -- n (irand 8)#
+   "808bd*4 808bd/2 "
+  #speed (slow 0.7 $range 1 6 sine)
+  -- #pan (slow "<0.22 0.5 0.43>" square)
+  #gain 0.9
+  -- #room 0.8
+  #orbit 2
+  -- #orbit "<0 1 4 6>"
+  -- #orbit "<0 [1, 4] 6>"
+  -- #orbit (irand (8))
+
+d2
+   -- $slow "4 8"
+   $fast "<2 3 4>"
+  -- $every 4 (#speed "<20 24 12>")
+  -- $every 3 (#speed 0.7)
+  -- $  n (irand 8)#
+  $ "[cp*4 cp/2 ]/<1 4 1 2>"
+  #speed (slow 0.7 $range 1 6 sine)
+  #pan (slow "<0.32 0.5 0.33>" square)
+  #gain 0.6
+  -- #room 0.8
+  #orbit 1
+  -- #orbit "<0 1 4 6>"
+  -- #orbit "<0 [1, 4] 6>"
+  -- #orbit (irand (8))
+
+  d3
+    $ 
